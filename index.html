@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio Frecuencias</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container { width: 50%; margin: auto; text-align: center; }
+        select, button { margin: 10px; padding: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Selecciona una frecuencia</h2>
+        <form action="mostrar.php" method="GET">
+            <select name="frecuencia" id="frecuencia">
+                <option value="">Cargando...</option>
+            </select>
+            <button type="submit">Mostrar información</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch("obtener_frecuencias.php")
+                .then(response => response.json())
+                .then(data => {
+                    let select = document.getElementById("frecuencia");
+                    select.innerHTML = ""; // Limpiar antes de llenar
+                    data.forEach(frecuencia => {
+                        let option = document.createElement("option");
+                        option.value = frecuencia.id;
+                        option.textContent = frecuencia.frecuencia_mhz;
+                        select.appendChild(option);
+                    });
+                })
+                .catch(error => console.error("Error cargando las frecuencias:", error));
+        });
+    </script>
+</body>
+</html>
