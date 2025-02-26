@@ -154,6 +154,13 @@ ALTER TABLE `locutor`
 --
 
 --
+-- Filtros para la tabla `estaciones`
+--
+ALTER TABLE `estaciones`
+  ADD CONSTRAINT `estaciones_ibfk_1` FOREIGN KEY (`frecuencia`) REFERENCES `frecuencias` (`frecuencia_mhz`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `estaciones_ibfk_2` FOREIGN KEY (`generoMusical`) REFERENCES `generos` (`id_genero`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Filtros para la tabla `locutor`
 --
 ALTER TABLE `locutor`
